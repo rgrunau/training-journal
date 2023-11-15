@@ -2,6 +2,7 @@ import { prisma } from '@/utils/db'
 import { getUserByClerkId } from '@/utils/auth'
 import EntryCard from '@/components/journal/entryCard'
 import AddNewEntryCard from '@/components/journal/addNewEntryCard'
+import Link from 'next/link'
 
 const getJournalEntries = async () => {
   const user = await getUserByClerkId({})
@@ -19,23 +20,19 @@ const getJournalEntries = async () => {
 
 export default async function JournalPage() {
   const entries = await getJournalEntries()
-  console.log(entries)
   return (
     <div>
       <h1>Journal</h1>
-      <div className="w-full flex flex-wrap items-center justify-start py-4 px-2 mt-4">
-        <div className="w-1/3">
-          <AddNewEntryCard />
-        </div>
-      </div>
-      {entries.length > 0 && (
-        <ul>
-          {entries.map((entry) => (
-            <EntryCard key={entry.id || ''} entry={entry || {}} />
+      <div className="grid grid-cols-3 gap-4 py-4 px-2 mt-4">
+        <AddNewEntryCard />
+        {entries.length > 0 &&
+          entries.map((entry) => (
+            <Link href={`/journal/${entry.id}`} key={entry.id}>
+              <EntryCard entry={entry || {}} />
+            </Link>
           ))}
-        </ul>
-      )}
-      {entries.length === 0 && <p>Write a journal to get started</p>}
+        {entries.length === 0 && <p>Write a journal to get started</p>}
+      </div>
     </div>
   )
 }

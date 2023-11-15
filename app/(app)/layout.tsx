@@ -26,7 +26,10 @@ export default function MainLayout({
         </div>
       </aside>
       <div className="w-2/3 py-12 px-4 grow">
-        <main id="mainContent" className="w-full max-w-11/12 mx-auto bg-white">
+        <main
+          id="mainContent"
+          className="w-full h-full max-w-11/12 mx-auto bg-white "
+        >
           {children}
         </main>
       </div>
