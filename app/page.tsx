@@ -1,7 +1,12 @@
+import { auth } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth()
+
+  let href = userId ? '/dashboard' : '/sign-in'
+
   return (
     <main className="flex w-full h-screen items-center justify-center py-24 px-36 bg-slate-900 text-slate-50">
       <div className="w-full lg:w-2/3">
@@ -15,7 +20,7 @@ export default function Home() {
         </div>
         <div className="mt-4 py-3">
           <Link
-            href="sign-up"
+            href={href}
             className="bg-slate-100 text-slate-900 text-3xl px-4 py-2 rounded-md font-regular"
           >
             Get Started
