@@ -1,3 +1,4 @@
+import { UserButton } from '@clerk/nextjs'
 import Link from 'next/link'
 
 export default function MainLayout({
@@ -20,6 +21,9 @@ export default function MainLayout({
             </li>
           </ul>
         </nav>
+        <div className="justify-self-end self-baseline">
+          <UserButton />
+        </div>
       </aside>
       <div className="w-2/3 py-12 px-4 grow">
         <main id="mainContent" className="w-full max-w-11/12 mx-auto bg-white">
