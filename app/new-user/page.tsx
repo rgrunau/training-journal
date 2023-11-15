@@ -2,6 +2,7 @@ import { prisma } from '@/utils/db'
 import { currentUser } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 const createNewUser = async () => {
+  debugger
   const clerkUser = await currentUser()
   const match = await prisma.user.findUnique({
     where: {
@@ -10,7 +11,7 @@ const createNewUser = async () => {
   })
 
   if (!match) {
-    await prisma.user.create({
+    const createUser = await prisma.user.create({
       data: {
         clerkId: clerkUser?.id as string,
         email: clerkUser?.emailAddresses[0].emailAddress as string,
@@ -18,9 +19,11 @@ const createNewUser = async () => {
         lastName: clerkUser?.lastName as string,
       },
     })
+    if (createUser) {
+      console.log('user created')
+    }
   }
-
-  return redirect('/dashboard')
+  redirect('/dashboard')
 }
 
 export default async function NewUserPage() {
