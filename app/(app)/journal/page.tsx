@@ -28,7 +28,7 @@ export default async function JournalPage() {
         {entries.length > 0 &&
           entries.map((entry) => (
             <Link href={`/journal/${entry.id}`} key={entry.id}>
-              <EntryCard entry={entry || {}} />
+              <EntryCard entry={entry} />
             </Link>
           ))}
         {entries.length === 0 && <p>Write a journal to get started</p>}
