@@ -31,7 +31,9 @@ model JournalEntry {
 
   content String @db.Text
   analysis Analysis?
-  @@index([userId], name: "userId")
+  //this is a compound index. It means that the combination of userId and id must be unique
+  // this adds a security layer to the app so you have to be the logged in user in order to see your own entries
+  @@unique([userId, id])
 }
 
 model Analysis {
