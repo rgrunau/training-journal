@@ -2,10 +2,11 @@ import { prisma } from '@/utils/db'
 import { getUserByClerkId } from '@/utils/auth'
 import JournalEditor from '@/components/journal/JournalEditor'
 import { analyzeJournalEntry } from '@/utils/ai'
+import { JournalEntry } from '@prisma/client'
 
 const getJournalEntry = async (id: string) => {
   const user = await getUserByClerkId({})
-  const entry = await prisma.journalEntry.findUnique({
+  const entry = (await prisma.journalEntry.findUnique({
     where: {
       // this is how you query on a compound key
       userId_id: {
@@ -13,7 +14,7 @@ const getJournalEntry = async (id: string) => {
         id,
       },
     },
-  })
+  })) as JournalEntry
 
   return entry
 }

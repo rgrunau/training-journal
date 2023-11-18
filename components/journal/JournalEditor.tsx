@@ -1,9 +1,14 @@
 'use client'
+import { JournalEntry } from '@prisma/client'
 import { updateJournalEntry } from '@/utils/api'
 import { useEffect, useRef, useState } from 'react'
 import { useAutosave } from 'react-autosave'
 
-export default function JournalEditor({ entry }) {
+interface JournalEditorProps {
+  entry: JournalEntry
+}
+
+export default function JournalEditor({ entry }: JournalEditorProps) {
   const [value, setValue] = useState(entry?.content)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const editorRef = useRef<HTMLTextAreaElement>(null)
