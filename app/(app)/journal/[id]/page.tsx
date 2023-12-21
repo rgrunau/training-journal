@@ -1,7 +1,6 @@
 import { prisma } from '@/utils/db'
 import { getUserByClerkId } from '@/utils/auth'
 import JournalEditor from '@/components/journal/JournalEditor'
-import { analyzeJournalEntry } from '@/utils/ai'
 import { JournalEntry } from '@prisma/client'
 
 const getJournalEntry = async (id: string) => {

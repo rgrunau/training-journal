@@ -15,12 +15,18 @@ export const POST = async () => {
   })
 
   const analysis = await analyzeJournalEntry(entry.content)
-  await prisma.analysis.create({
-    data: {
-      entryId: entry.id,
-      ...analysis,
-    },
-  })
+
+  if (analysis) {
+    await prisma.analysis.create({
+      data: {
+        entryId: entry.id,
+        mood: analysis.mood,
+        summary: analysis.summary,
+        negative: analysis.negative,
+        color: analysis.color,
+      },
+    })
+  }
   revalidatePath('/journal')
   return NextResponse.json({ data: entry })
 }
