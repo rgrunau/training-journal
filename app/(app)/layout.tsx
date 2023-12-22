@@ -19,6 +19,11 @@ export default function MainLayout({
                 Journal
               </Link>
             </li>
+            <li>
+              <Link href="/news" className="py-2">
+                News
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className="justify-self-end self-baseline">
@@ -28,7 +33,7 @@ export default function MainLayout({
       <div className="w-2/3 py-12 px-4 grow">
         <main
           id="mainContent"
-          className="w-full h-full max-w-11/12 mx-auto bg-white "
+          className="w-full h-full max-w-11/12 mx-auto bg-white rounded-lg shadow-lg p-6 "
         >
           {children}
         </main>
