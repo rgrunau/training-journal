@@ -1,6 +1,20 @@
 import Link from 'next/link'
 
-async function getNewsHeadlines(sources: string[] = []) {
+interface Article {
+  source: {
+    id: string
+    name: string
+  }
+  author: string
+  title: string
+  description: string
+  url: string
+  urlToImage: string
+  publishedAt: string
+  content: string
+}
+
+async function getNewsHeadlines(sources: string[] = []): Promise<Article[]> {
   const params = new URLSearchParams({
     sources: sources.join(','),
   })
@@ -25,6 +39,7 @@ export default async function NewsPage() {
     'the-new-york-times',
   ]
   const headlines = await getNewsHeadlines(sources)
+  console.log(headlines)
   return (
     <div className="w-full h-full flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2">
