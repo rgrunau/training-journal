@@ -26,10 +26,15 @@ export default async function NewsPage() {
   ]
   const headlines = await getNewsHeadlines(sources)
   return (
-    <div className="w-full flex flex-col lg:flex-row">
+    <div className="w-full h-full flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2">
-        <div className="p-4 text-2xl">
-          <div>Top Headlines from your sources</div>
+        <div className="p-4 text-2xl flex flex-col">
+          <div className="w-full">Top Headlines from your sources</div>
+          <div className="text-lg w-full">
+            <Link className="text-sky-700/80" href="/user-preferences">
+              Manage Sources in your preferences
+            </Link>
+          </div>
         </div>
         <div className="flex flex-col">
           {headlines?.map((article) => (
@@ -43,7 +48,7 @@ export default async function NewsPage() {
               </div>
               <div className="w-full">
                 <p className="text-black">{`from: ${
-                  article.source.name || ''
+                  article.source.name ?? ''
                 }`}</p>
               </div>
             </Link>
